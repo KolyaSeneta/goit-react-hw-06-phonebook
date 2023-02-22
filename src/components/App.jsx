@@ -1,6 +1,6 @@
 import { useEffect,useState } from 'react';
 
-import { nanoid } from 'nanoid';
+
 import {Contacts} from './Contacts/Contacts'
 import { Filter } from './Filter/Filter'
 import ContactDelete from './Deleted/ContactDelete'
@@ -20,21 +20,13 @@ export const  App = () => {
     const {  value } = e.target;
    setFilter( value );
   };
- const  handleOnSubmit = (e) => {
-    const id = nanoid();
-    const number = e.number;
-    const name = e.name;
-    const nameContacts = contacts
-
+//  const  handleOnSubmit = (e) => {
+//     const id = nanoid();
+//     const number = e.number;
+//     const name = e.name;
+//     const nameContacts = contacts
     
-    if (nameContacts.findIndex(contact => name === contact.name) !== -1) {
-     alert(`${name} is already in contacts.`);
-    } else {
-      setContacts([...contacts, {name,number,id}])
-   }
-    
-  }
-console.log(contacts);
+//   }
   const  getFilteredContacts = () => {
     const filterContactsList = contacts.filter(contact => {
       return contact.name
@@ -44,10 +36,10 @@ console.log(contacts);
 
     return filterContactsList;
   };
-  const handleOnDelete = e => {
-    setContacts( contacts.filter(contact => contact.id !== e)
-    );
-  };
+  // const handleOnDelete = e => {
+  //   setContacts( contacts.filter(contact => contact.id !== e)
+  //   );
+  // };
   useEffect(() => {
     const contactsStorage = localStorage.getItem('contacts')
     const parsed = JSON.parse(contactsStorage)
@@ -66,13 +58,13 @@ console.log(contacts);
       return (
         <div>
 
-          <Contacts handleOnSubmit = {handleOnSubmit} />
+          <Contacts  />
         
           <h2>Contacts</h2>
          <Filter  filter={filter} handleOnChange={handleOnChange}/>
         <ContactDelete
           contacts={getFilteredContacts()}
-          handleOnDelete={handleOnDelete}
+          
         />
         </div>
       );
